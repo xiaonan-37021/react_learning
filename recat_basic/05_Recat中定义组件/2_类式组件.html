@@ -1,0 +1,115 @@
+<!--
+ *                   江城子 . 程序员之歌
+ * 
+ *               十年生死两茫茫，写程序，到天亮。
+ *                   千行代码，Bug何处藏。
+ *               纵使上线又怎样，朝令改，夕断肠。
+ * 
+ *               领导每天新想法，天天改，日日忙。
+ *                   相顾无言，惟有泪千行。
+ *               每晚灯火阑珊处，夜难寐，加班狂。
+ * 
+ * 
+ * @Author: Nan_Xiao Xiao.nan@iwhalecloud.com
+ * @Date: 2023-12-12 16:03:17
+ * @LastEditors: Nan_Xiao Xiao.nan@iwhalecloud.com
+ * @LastEditTime: 2023-12-12 16:05:23
+ * @FilePath: \recat_basic\复习\2_类式组件.html
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+ -->
+
+<!--
+ *                                |~~~~~~~|
+ *                                |       |
+ *                                |       |
+ *                                |       |
+ *                                |       |
+ *                                |       |
+ *     |~.\\\_\~~~~~~~~~~~~~~xx~~~         ~~~~~~~~~~~~~~~~~~~~~/_//;~|
+ *     |  \  o \_         ,XXXXX),                         _..-~ o /  |
+ *     |    ~~\  ~-.     XXXXX`)))),                 _.--~~   .-~~~   |
+ *      ~~~~~~~`\   ~\~~~XXX' _/ ';))     |~~~~~~..-~     _.-~ ~~~~~~~
+ *               `\   ~~--`_\~\, ;;;\)__.---.~~~      _.-~
+ *                 ~-.       `:;;/;; \          _..-~~
+ *                    ~-._      `''        /-~-~
+ *                        `\              /  /
+ *                          |         ,   | |
+ *                           |  '        /  |
+ *                            \/;          |
+ *                             ;;          |
+ *                             `;   .       |
+ *                             |~~~-----.....|
+ *                            | \             \
+ *                           | /\~~--...__    |
+ *                           (|  `\       __-\|
+ *                           ||    \_   /~    |
+ *                           |)     \~-'      |
+ *                            |      | \      '
+ *                            |      |  \    :
+ *                             \     |  |    |
+ *                              |    )  (    )
+ *                               \  /;  /\  |
+ *                               |    |/   |
+ *                               |    |   |
+ *                                \  .'  ||
+ *                                |  |  | |
+ *                                (  | |  |
+ *                                |   \ \ |
+ *                                || o `.)|
+ *                                |`\\) |
+ *                                |       |
+ *                                |       |
+-->
+
+<!--
+ * @Author: Nan_Xiao Xiao.nan@iwhalecloud.com
+ * @Date: 2023-12-11 20:46:04
+ * @LastEditors: Nan_Xiao Xiao.nan@iwhalecloud.com
+ * @LastEditTime: 2023-12-11 20:46:30
+ * @FilePath: \recat_basic\复习\1_类的基本知识.html
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2_类式组件</title>
+</head>
+<body>
+    <!-- 准备好一个容器 -->
+    <div id="test">
+    </div>
+</body>
+
+<!-- 引入react 核心库 WARNING:优先引入-->
+<script type="text/javascript" src="../js/react.development.js"></script>
+<!-- 引入react-dom,用于支持recat操作dom -->
+<script type="text/javascript" src="../js/react-dom.development.js"></script>
+<!-- 引入babel 用于将jsx转为js -->
+<script type="text/javascript" src="../js/babel.min.js"></script>
+<script type="text/babel">
+    // 创建类式组件
+    class MyComponent extends React.Component{
+        // render是放在哪里的？ MyComponent的原型对象上，供示例使用 MyComponent.prototype
+        // render中的this是谁？ MyComponent的实例对象 == MyComponent组件实例对象
+        render(){
+            console.log('render中的this:', this)
+            return <h2>我是用类定义的组件（适用于【复杂组件】的定义）</h2>;
+        }
+    }
+
+    // 渲染组件到页面
+
+    /**
+         * 执行了ReactDOM.createRoot后发生了什么
+         *      1. React解析组件标签，找到MyComponent组件。
+         *      2. 发现组件是使用类定义的，随后New出来该类的实例，并通过该实例调用到原型上的render方法
+         *      3. 将render返回的虚拟DOM转为真实的DOM，随后呈现在页面中
+         * 
+         * 
+         **/
+    const root = ReactDOM.createRoot(document.getElementById('test'))
+    root.render(<MyComponent/>)
+</script>
+</html>

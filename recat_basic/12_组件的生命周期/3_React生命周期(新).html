@@ -1,0 +1,245 @@
+<!--
+ *                                |~~~~~~~|
+ *                                |       |
+ *                                |       |
+ *                                |       |
+ *                                |       |
+ *                                |       |
+ *     |~.\\\_\~~~~~~~~~~~~~~xx~~~         ~~~~~~~~~~~~~~~~~~~~~/_//;~|
+ *     |  \  o \_         ,XXXXX),                         _..-~ o /  |
+ *     |    ~~\  ~-.     XXXXX`)))),                 _.--~~   .-~~~   |
+ *      ~~~~~~~`\   ~\~~~XXX' _/ ';))     |~~~~~~..-~     _.-~ ~~~~~~~
+ *               `\   ~~--`_\~\, ;;;\)__.---.~~~      _.-~
+ *                 ~-.       `:;;/;; \          _..-~~
+ *                    ~-._      `''        /-~-~
+ *                        `\              /  /
+ *                          |         ,   | |
+ *                           |  '        /  |
+ *                            \/;          |
+ *                             ;;          |
+ *                             `;   .       |
+ *                             |~~~-----.....|
+ *                            | \             \
+ *                           | /\~~--...__    |
+ *                           (|  `\       __-\|
+ *                           ||    \_   /~    |
+ *                           |)     \~-'      |
+ *                            |      | \      '
+ *                            |      |  \    :
+ *                             \     |  |    |
+ *                              |    )  (    )
+ *                               \  /;  /\  |
+ *                               |    |/   |
+ *                               |    |   |
+ *                                \  .'  ||
+ *                                |  |  | |
+ *                                (  | |  |
+ *                                |   \ \ |
+ *                                || o `.)|
+ *                                |`\\) |
+ *                                |       |
+ *                                |       |
+ * 
+ * @Author: Nan_Xiao Xiao.nan@iwhalecloud.com
+ * @Date: 2023-12-27 10:59:25
+ * @LastEditors: Nan_Xiao Xiao.nan@iwhalecloud.com
+ * @LastEditTime: 2023-12-27 15:59:10
+ * @Description: 
+ -->
+
+<!--
+ *  ┌─────────────────────────────────────────────────────────────┐
+ *  │┌───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┐│
+ *  ││Esc│!1 │@2 │#3 │$4 │%5 │^6 │&7 │*8 │(9 │)0 │_- │+= │|\ │`~ ││
+ *  │├───┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴───┤│
+ *  ││ Tab │ Q │ W │ E │ R │ T │ Y │ U │ I │ O │ P │{[ │}] │ BS  ││
+ *  │├─────┴┬──┴┬──┴┬──┴┬──┴┬──┴┬──┴┬──┴┬──┴┬──┴┬──┴┬──┴┬──┴─────┤│
+ *  ││ Ctrl │ A │ S │ D │ F │ G │ H │ J │ K │ L │: ;│" '│ Enter  ││
+ *  │├──────┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴────┬───┤│
+ *  ││ Shift  │ Z │ X │ C │ V │ B │ N │ M │< ,│> .│? /│Shift │Fn ││
+ *  │└─────┬──┴┬──┴──┬┴───┴───┴───┴───┴───┴──┬┴───┴┬──┴┬─────┴───┘│
+ *  │      │Fn │ Alt │         Space         │ Alt │Win│   HHKB   │
+ *  │      └───┴─────┴───────────────────────┴─────┴───┘          │
+ *  └─────────────────────────────────────────────────────────────┘
+ * 
+ * @Author: Nan_Xiao Xiao.nan@iwhalecloud.com
+ * @Date: 2023-12-26 19:40:59
+ * @LastEditors: Nan_Xiao Xiao.nan@iwhalecloud.com
+ * @LastEditTime: 2023-12-26 19:41:12
+ * @Description: 
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<!-- 引入react 核心库 WARNING:优先引入-->
+<script type="text/javascript" src="../js/react.development.js"></script>
+<!-- 引入react-dom,用于支持recat操作dom -->
+<script type="text/javascript" src="../js/react-dom.development.js"></script>
+<!-- 引入babel 用于将jsx转为js -->
+<script type="text/javascript" src="../js/babel.min.js"></script>
+
+
+
+<body>
+    <div id="test"></div>
+</body>
+
+<script type="text/babel">
+
+    /*
+        1，初始化阶段:由ReactDOM.render()触发---初次渲染
+            1.constructor()
+            2. getDerivedStateFromProps3.render()
+            4.componentDidMount( ) =====>常用
+                一般在这个钩子中做一些初始化的事，例如:开启定时器、发送网络请求、订阅消息
+        2．更新阶段:由组件内部this.setSate()或父组件重新render触发
+            1.getDerivedStateFromProps
+            2.shouldComponentUpdate()
+            3.render()
+            4. getSnapshotBeforeUpdate
+            5. componentDidUpdate()
+        3．卸载组件:由ReactDOM.unmountComponentAtNode()触发
+            1.componentWillUnmount()=====>常用
+        一般在这个钩子中做一些收尾的事，例如:关闭定时器、取消订阅消息
+    */
+
+    class Count extends React.Component {
+
+        // 构造器函数
+        constructor(proper) {
+            console.log('Count--constructor')
+            super(proper)
+            // 初始化状态
+            this.state = { count: 0 }
+        }
+
+        // 若state的值在任何时候都取决于props，那么可以使用
+        static getDerivedStateFromProps(props,state){
+            console.log('count--getDerivedStateFromProps',props,state)
+            // return props;
+            return null;
+        }
+
+        // 在更新之前获取快照
+        getSnapshotBeforeUpdate(){
+            console.log('Count--getSnapshotBeforeUpdate')
+            return 'haha'
+        }
+
+        //-------------------------------------------------------------------------------
+
+        //组件将要加载的时候调用
+        UNSAFE_componentWillMount() {
+            console.log('count--componentWillMount 组件将要加载的时候调用')
+        }
+
+        // 组件挂载完毕调用
+        componentDidMount() {
+            console.log('count--componentDidMount 组件挂载完毕调用')
+        }
+
+        //-------------------------------------------------------------------------------
+
+        // 组件更新状态时候调用 true更新 false不更新（setState）
+        shouldComponentUpdate() {
+            console.log('count--shouldComponentUpdate 组件更新状态时候调用 （setState）')
+            return true
+        }
+
+        // 组件将要更新的钩子 （setState）
+        UNSAFE_componentWillUpdate() {
+            console.log('count--componentWillUpdate 组件将要更新的钩子 （setState）')
+        }
+
+        // 组件更新完毕的钩子 （setState）
+        componentDidUpdate(preProps,preState,snapshotValue) {
+            console.log('count--componentWillUpdate 组件更新完毕的钩子 （setState）',preProps,preState,snapshotValue)
+        }
+
+        // 组件将要卸载的回调
+        componentWillUnmount() {
+            console.log('count--componentWillUnmount 组件将要卸载的回调')
+        }
+
+        //-------------------------------------------------------------------------------
+
+        // 强制更新但不修改状态的函数
+        force = () => {
+            console.log('count--forceUpdate 强制更新按钮的回调')
+            this.forceUpdate();
+        }
+
+
+        //-------------------------------------------------------------------------------
+        // 卸载组件
+        death = () => {
+            root.unmount()
+        }
+
+        // +1回调  继承外层作用域的 this 值Count
+        add = () => {
+            const { count } = this.state;
+            this.setState({ count: count + 1 })
+        }
+
+        //-------------------------------------------------------------------------------
+
+        render() {
+            console.log('count--render')
+            const { count } = this.state;
+            return (
+                <div>
+                    <h2>当前求和为：{count}</h2>
+                    <button onClick={this.add}>点我加1</button>
+                    <button onClick={this.death}>卸载组件</button>
+                    <button onClick={this.force}>不更改任何状态中的的数据，强制更新一下</button>
+                </div>
+            )
+        }
+    }
+
+    class A extends React.Component {
+
+        // 初始化状态
+        state = { carName: '奔驰' }
+
+        changeCar = () => {
+            this.setState({ carName: '柯尼塞格' })
+        }
+
+        render() {
+            return (
+                <div>
+                    <div>我是A组件</div>
+                    <button onClick={this.changeCar}>换车</button>
+                    <B carName={this.state.carName} />
+                </div>
+            )
+        }
+    }
+
+    class B extends React.Component {
+
+        // 将要接收新的Props的时候调用
+        UNSAFE_componentWillReceiveProps(props) {
+            console.log('B--将要更新子组件Props时候调用----', props)
+        }
+
+        render() {
+            return (
+                <div>我是B组件，接收到的车是:{this.props.carName}</div>
+            )
+        }
+    }
+
+    const root = ReactDOM.createRoot(document.getElementById('test'))
+    root.render(<Count/>)
+</script>
+
+</html>

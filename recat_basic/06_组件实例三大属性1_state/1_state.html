@@ -1,0 +1,100 @@
+<!--
+ *                   ___====-_  _-====___
+ *             _--^^^#####//      \\#####^^^--_
+ *          _-^##########// (    ) \\##########^-_
+ *         -############//  |\^^/|  \\############-
+ *       _/############//   (@::@)   \############\_
+ *      /#############((     \\//     ))#############\
+ *     -###############\\    (oo)    //###############-
+ *    -#################\\  / VV \  //#################-
+ *   -###################\\/      \//###################-
+ *  _#/|##########/\######(   /\   )######/\##########|\#_
+ *  |/ |#/\#/\#/\/  \#/\##\  |  |  /##/\#/  \/\#/\#/\#| \|
+ *  `  |/  V  V  `   V  \#\| |  | |/#/  V   '  V  V  \|  '
+ *     `   `  `      `   / | |  | | \   '      '  '   '
+ *                      (  | |  | |  )
+ *                     __\ | |  | | /__
+ *                    (vvv(VVV)(VVV)vvv)
+ * 
+ *      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ * 
+ *                神兽保佑            永无BUG
+ * 
+ * @Author: Nan_Xiao Xiao.nan@iwhalecloud.com
+ * @Date: 2023-12-12 17:37:48
+ * @LastEditors: Nan_Xiao Xiao.nan@iwhalecloud.com
+ * @LastEditTime: 2023-12-13 16:12:27
+ * @Description: 
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2_类式组件</title>
+</head>
+
+<body>
+    <!-- 准备好一个容器 -->
+    <div id="test">
+    </div>
+</body>
+
+<!-- 引入react 核心库 WARNING:优先引入-->
+<script type="text/javascript" src="../js/react.development.js"></script>
+<!-- 引入react-dom,用于支持recat操作dom -->
+<script type="text/javascript" src="../js/react-dom.development.js"></script>
+<!-- 引入babel 用于将jsx转为js -->
+<script type="text/javascript" src="../js/babel.min.js"></script>
+<script type="text/babel">
+    // 创建类式组件
+    class Weather extends React.Component {
+
+        // 有状态构造函数，添加自定义信息 state
+        // 构建器调用几次---- 1次
+        constructor(props) {
+            console.log('constructor')
+            super(props)
+            // 初始化状态
+            this.state = { isHot: false, wind: '大风' }
+            // 解决changeWeather 中指向问题
+            this.changeWeather = this.changeWeather.bind(this)
+        }
+
+        // render调用几次？----1+n次 1是 指的初始化，n是 状态更新的次数（调用setState方法次数）
+        render() {
+            console.log('render中的this:', this)
+            // ES6的解构赋值 读取状态
+            const { isHot,wind } = this.state
+            // 不能直接写方法，需要加上this通过实例调用
+            return <h2 onClick={this.changeWeather}>今天天气很{isHot ? '炎热' : '凉爽'}, {wind}</h2>;
+        }
+
+        // changeWeather放在了Weather的原型上 供实例使用
+        // 由于changeWeather是作为onClick的回调，所以不是通过实例调用，是直接调用
+        // 类中的方法默认开启了局部严格模式（use strict），所以changeWeather中的this是undefined
+        changeWeather() {
+            // 获取之前的isHot值
+            const isHot = this.state.isHot;
+            // 严重注意：状态不能直接更改，下面的就是直接更改
+            // this.state.isHot = !isHot; 这是错误的写法
+
+            // 严重注意：状态必须通过setState进行更新，且更新是一种合并，不是替换
+            this.setState({isHot: !isHot})
+            const a ={}
+            a.b=3
+            console.log(a)
+        }
+    }
+
+    // 渲染组件到页面
+    const root = ReactDOM.createRoot(document.getElementById('test'))
+    root.render(<Weather />)
+
+
+
+
+</script>
+
+</html>

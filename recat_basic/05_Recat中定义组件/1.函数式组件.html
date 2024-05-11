@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <!-- 移动端适配的 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>hello_recat</title>
+</head>
+
+<style>
+    .title {
+        background-color: orange;
+        width: 200px;
+    }
+</style>
+
+<body>
+    <!-- 准备好一个容器 -->
+    <div id="test">
+
+    </div>
+
+    <!-- 引入react 核心库 WARNING:优先引入-->
+    <script type="text/javascript" src="../js/react.development.js"></script>
+    <!-- 引入react-dom,用于支持recat操作dom -->
+    <script type="text/javascript" src="../js/react-dom.development.js"></script>
+    <!-- 引入babel 用于将jsx转为js -->
+    <script type="text/javascript" src="../js/babel.min.js"></script>
+
+    <script type="text/babel"> /* 此处一定要写babel */
+
+        // 创建函数式组件
+        // 首字母必须大写 必须有返回值
+        function MyComponent(){
+
+            console.log(this) // 此处的this是undefined，因为babel开启了严格模式
+            return <h2>我是用函数定义的组件（适用于【简单组件】的定义）</h2>
+        }
+
+        // 2.渲染组件到页面
+        const root = ReactDOM.createRoot(document.getElementById('test'))
+        // 必须要写组件标签
+        root.render(<MyComponent/>)
+
+        /**
+         * 执行了ReactDOM.createRoot后发生了什么
+         *      1. React解析组件标签，找到MyComponent组件。
+         *      2. 发现组件是使用函数式定义的，随后调用该函数，将返回的虚拟DOM转为真实的DOM，随后呈现在页面中
+         * 
+         * 
+         **/
+
+    </script>
+
+
+
+</body>
+
+</html>

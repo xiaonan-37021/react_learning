@@ -1,0 +1,139 @@
+<!--
+ *                                |~~~~~~~|
+ *                                |       |
+ *                                |       |
+ *                                |       |
+ *                                |       |
+ *                                |       |
+ *     |~.\\\_\~~~~~~~~~~~~~~xx~~~         ~~~~~~~~~~~~~~~~~~~~~/_//;~|
+ *     |  \  o \_         ,XXXXX),                         _..-~ o /  |
+ *     |    ~~\  ~-.     XXXXX`)))),                 _.--~~   .-~~~   |
+ *      ~~~~~~~`\   ~\~~~XXX' _/ ';))     |~~~~~~..-~     _.-~ ~~~~~~~
+ *               `\   ~~--`_\~\, ;;;\)__.---.~~~      _.-~
+ *                 ~-.       `:;;/;; \          _..-~~
+ *                    ~-._      `''        /-~-~
+ *                        `\              /  /
+ *                          |         ,   | |
+ *                           |  '        /  |
+ *                            \/;          |
+ *                             ;;          |
+ *                             `;   .       |
+ *                             |~~~-----.....|
+ *                            | \             \
+ *                           | /\~~--...__    |
+ *                           (|  `\       __-\|
+ *                           ||    \_   /~    |
+ *                           |)     \~-'      |
+ *                            |      | \      '
+ *                            |      |  \    :
+ *                             \     |  |    |
+ *                              |    )  (    )
+ *                               \  /;  /\  |
+ *                               |    |/   |
+ *                               |    |   |
+ *                                \  .'  ||
+ *                                |  |  | |
+ *                                (  | |  |
+ *                                |   \ \ |
+ *                                || o `.)|
+ *                                |`\\) |
+ *                                |       |
+ *                                |       |
+ -->
+
+<!--
+ * @Author: Nan_Xiao Xiao.nan@iwhalecloud.com
+ * @Date: 2023-12-11 20:46:04
+ * @LastEditors: Nan_Xiao Xiao.nan@iwhalecloud.com
+ * @LastEditTime: 2023-12-11 20:46:30
+ * @FilePath: \recat_basic\复习\1_类的基本知识.html
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1_类的基本知识</title>
+</head>
+
+<body>
+
+
+</body>
+
+<script type="text/javascript">
+
+    /**
+     * 
+     * 总结：
+     *  1.类中的构造器不是必须写的，要对实例进行一些初始化的操作时，如添加指定属性时才写
+     *  2.如果A类继承了B类，A类中写了构造器，那么A类构造器中的super是必须要写的。
+     *  3.类中定义的方法，都是放在了类的原型对象上，供实例使用
+     * */
+    // 创建一个Person类
+    class Person {
+        // 构建器方法
+        constructor(name, age) {
+            // 构造器的this是谁？ ---类的实例对象
+            this.name = name
+            this.age = age
+        }
+
+        // 一般方法
+        // speak方法放在了哪里? ---类的原型对象上，供示例使用
+        // 通过Person实例调用speak时，speak中的this就说Person实例
+        speak() {
+            console.log(`我叫${this.name}，我年龄是${this.age}`)
+        }
+    }
+
+    // 创建一个Person的实例对象
+    const p1 = new Person('hello', 19)
+    const p2 = new Person('nihao', 20)
+
+    console.log(p1)
+    console.log(p2)
+
+    p1.speak()
+    p2.speak()
+
+
+    console.log('-------------------------------------')
+
+    class Student extends Person {
+        constructor(name, age, grade) {
+            // 子类必须调用父类构造器，super 必须在最上面
+            super(name, age)
+            this.grade = grade
+        }
+
+        speak() {
+            console.log(`我叫${this.name}，我年龄是${this.age},现在是${this.grade}`)
+        }
+    }
+
+    const s1 = new Student('小张', 19, '高一')
+
+    console.log(s1)
+
+
+    class Car {
+        constructor(name, price) {
+            this.name = name
+            this.price = price
+            // this.wheel = 4
+        }
+
+        // 类中可以直接写赋值语句，如下代码含义是：给Car的实例对象添加一个属性，名为a，值为1
+        a =1
+        wheel = 4
+    }
+
+    const c1 = new Car('福特', 18)
+
+    console.log(c1)
+</script>
+
+</html>

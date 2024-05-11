@@ -1,0 +1,72 @@
+<!--
+ *                   ___====-_  _-====___
+ *             _--^^^#####//      \\#####^^^--_
+ *          _-^##########// (    ) \\##########^-_
+ *         -############//  |\^^/|  \\############-
+ *       _/############//   (@::@)   \############\_
+ *      /#############((     \\//     ))#############\
+ *     -###############\\    (oo)    //###############-
+ *    -#################\\  / VV \  //#################-
+ *   -###################\\/      \//###################-
+ *  _#/|##########/\######(   /\   )######/\##########|\#_
+ *  |/ |#/\#/\#/\/  \#/\##\  |  |  /##/\#/  \/\#/\#/\#| \|
+ *  `  |/  V  V  `   V  \#\| |  | |/#/  V   '  V  V  \|  '
+ *     `   `  `      `   / | |  | | \   '      '  '   '
+ *                      (  | |  | |  )
+ *                     __\ | |  | | /__
+ *                    (vvv(VVV)(VVV)vvv)
+ * 
+ *      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ * 
+ *                神兽保佑            永无BUG
+ * 
+ * @Author: Nan_Xiao Xiao.nan@iwhalecloud.com
+ * @Date: 2023-12-12 17:37:48
+ * @LastEditors: Nan_Xiao Xiao.nan@iwhalecloud.com
+ * @LastEditTime: 2023-12-13 16:12:27
+ * @Description: 
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2_类式组件</title>
+</head>
+
+<body>
+    <!-- 准备好一个容器 -->
+    <div id="test">
+    </div>
+</body>
+
+<!-- 引入react 核心库 WARNING:优先引入-->
+<script type="text/javascript" src="../js/react.development.js"></script>
+<!-- 引入react-dom,用于支持recat操作dom -->
+<script type="text/javascript" src="../js/react-dom.development.js"></script>
+<!-- 引入babel 用于将jsx转为js -->
+<script type="text/javascript" src="../js/babel.min.js"></script>
+<script type="text/babel">
+    class Weather extends React.Component {
+        
+        //初始化状态
+        state = { isHot: false, wind: '大风' }
+
+        render() {
+            const { isHot,wind } = this.state
+            return <h2 onClick={this.changeWeather}>今天天气很{isHot ? '炎热' : '凉爽'}, {wind}</h2>;
+        }
+
+        //自定义方法----要用赋值语句的形式+箭头函数
+        changeWeather = ()=>{
+            const isHot = this.state.isHot;
+            this.setState({isHot: !isHot})
+        }
+    }
+
+    const root = ReactDOM.createRoot(document.getElementById('test'))
+    root.render(<Weather />)
+</script>
+
+</html>

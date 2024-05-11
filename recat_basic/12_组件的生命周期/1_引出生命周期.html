@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>React各种钩子函数</title>
+</head>
+<!-- 引入react 核心库 WARNING:优先引入-->
+<script type="text/javascript" src="../js/react.development.js"></script>
+<!-- 引入react-dom,用于支持recat操作dom -->
+<script type="text/javascript" src="../js/react-dom.development.js"></script>
+<!-- 引入babel 用于将jsx转为js -->
+<script type="text/javascript" src="../js/babel.min.js"></script>
+
+<body>
+    <div id="test"></div>
+</body>
+
+<script type="text/babel">
+
+    // 创建组件
+    class Life extends React.Component {
+
+        state = { opacity: 1 }
+
+        death = () => {
+            // 卸载组件 这种是 ReactDOM.render渲染使用的卸载方法
+            // ReactDOM.unmountComponentAtNode(document.getElementById('test'))
+            root.unmount()
+        }
+
+        // 组件挂载完毕调用
+        componentDidMount() {
+            this.timer = setInterval(() => {
+                // 获取原状态
+                let { opacity } = this.state;
+                // 减少0.1
+                opacity -= 0.1
+                if (opacity <= 0) opacity = 1
+                // this.setState({opacity:opacity}) 下面是简写 名称和value一致即可
+                this.setState({ opacity })
+            }, 200)
+        }
+
+        // 卸载组件前调用
+        componentWillUnmount(){
+            // 清除定时器
+            clearInterval(this.timer)
+        }
+
+        render() {
+            console.log('render')
+            return (
+                <div>
+                    <h2 style={{ opacity: this.state.opacity }}>React学不会怎么办</h2>
+                    <button onClick={this.death}>不学了</button>
+                </div>
+            )
+        }
+    }
+
+    const root = ReactDOM.createRoot(document.getElementById('test'))
+    root.render(<Life />)
+
+</script>
+
+</html>

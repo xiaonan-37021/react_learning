@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <!-- 移动端适配的 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>hello_recat</title>
+</head>
+
+<style>
+    .title {
+        background-color: orange;
+        width: 200px;
+    }
+</style>
+
+<body>
+    <!-- 准备好一个容器 -->
+    <div id="test">
+
+    </div>
+
+    <!-- 引入react 核心库 WARNING:优先引入-->
+    <script type="text/javascript" src="../js/react.development.js"></script>
+    <!-- 引入react-dom,用于支持recat操作dom -->
+    <script type="text/javascript" src="../js/react-dom.development.js"></script>
+    <!-- 引入babel 用于将jsx转为js -->
+    <script type="text/javascript" src="../js/babel.min.js"></script>
+
+    <script type="text/babel"> /* 此处一定要写babel */
+
+        const myId = 'Ahyrg'
+        const MyVal = 'hello,RecaT'
+
+        // 1.创建虚拟DOM
+        const VDOM = (
+            <div>
+            <h2 className="title" id = {myId.toLowerCase()}>
+                <span style = {{color:'white',fontSize:'32px'}}>{MyVal.toLowerCase()}</span>
+            </h2>
+            <input type = 'text'/>
+            </div>
+        )
+
+        // 2.渲染虚拟DOM到页面
+        ReactDOM.render(VDOM,document.getElementById('test'))
+
+    </script>
+
+    <!--
+    1. 定义虚拟DOM，JSX不是字符串，不要加引号
+    2. 标签中混入JS表达式的时候使用{}
+    3. 样式的类名指定不能使用class，使用me
+    4. 内敛样式要使用{{}}包裹
+    5. 不能有多个根标签，只能有一个根标签
+    6. JSX的标签必须正确结束（自结束标签必须写/）
+    7. JSX中html标签应该小写，React组件应该大写开头。
+        如果小写字母开头，就将标签转化为 html 同名元素，如果 html 中无该标签对应的元素，就报错；
+        如果是大写字母开头，react 就去渲染对应的组件，如果没有就报错
+    8. 如果表达式是空值、布尔值、undefined，将不会显示
+    -->
+
+</body>
+
+</html>

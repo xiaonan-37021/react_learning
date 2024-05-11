@@ -1,0 +1,90 @@
+<!--
+ *           佛曰:  
+ *                   写字楼里写字间，写字间里程序员；  
+ *                   程序人员写程序，又拿程序换酒钱。  
+ *                   酒醒只在网上坐，酒醉还来网下眠；  
+ *                   酒醉酒醒日复日，网上网下年复年。  
+ *                   但愿老死电脑间，不愿鞠躬老板前；  
+ *                   奔驰宝马贵者趣，公交自行程序员。  
+ *                   别人笑我忒疯癫，我笑自己命太贱；  
+ *                   不见满街漂亮妹，哪个归得程序员？
+ * 
+ * @Author: Nan_Xiao Xiao.nan@iwhalecloud.com
+ * @Date: 2023-12-13 11:09:54
+ * @LastEditors: Nan_Xiao Xiao.nan@iwhalecloud.com
+ * @LastEditTime: 2023-12-13 15:59:10
+ * @FilePath: \recat_basic\复习\2_原生事件绑定.html
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+ -->
+
+<!--
+ * 
+ *    ┏┓　　　┏┓
+ *  ┏┛┻━━━┛┻┓
+ *  ┃　　　　　　　┃
+ *  ┃　　　━　　　┃
+ *  ┃　＞　　　＜　┃
+ *  ┃　　　　　　　┃
+ *  ┃...　⌒　...　┃
+ *  ┃　　　　　　　┃
+ *  ┗━┓　　　┏━┛
+ *      ┃　　　┃　
+ *      ┃　　　┃
+ *      ┃　　　┃
+ *      ┃　　　┃  神兽保佑
+ *      ┃　　　┃  代码无bug　　
+ *      ┃　　　┃
+ *      ┃　　　┗━━━┓
+ *      ┃　　　　　　　┣┓
+ *      ┃　　　　　　　┏┛
+ *      ┗┓┓┏━┳┓┏┛
+ *        ┃┫┫　┃┫┫
+ *        ┗┻┛　┗┻┛
+ * 
+ * @Author: Nan_Xiao Xiao.nan@iwhalecloud.com
+ * @Date: 2023-12-13 11:09:54
+ * @LastEditors: Nan_Xiao Xiao.nan@iwhalecloud.com
+ * @LastEditTime: 2023-12-13 11:10:06
+ * @FilePath: \recat_basic\复习\2_原生事件绑定.html
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <button id='btn1'>按钮1</button>
+    <button id='btn2'>按钮2</button>
+    <button onclick="demo()">按钮3</button>
+
+    <script type="text/javascript">
+
+        //最繁琐的 但也是兼容最好的
+        const btn1 = document.getElementById('btn1')
+        btn1.addEventListener('click', () => {
+            alert('按钮1被点击了')
+        })
+
+        const btn2 = document.getElementById('btn2')
+        btn2.onclick = () => {
+            alert('按钮2被点击了')
+        }
+
+        function demo() {
+            alert('按钮3被点击了')
+        }
+
+
+
+
+
+    </script>
+</body>
+
+</html>

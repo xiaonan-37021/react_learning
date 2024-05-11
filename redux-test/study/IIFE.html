@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    /* 
+        IIFE(Immediately Invoked Function Expression)
+
+        在 JavaScript 中，connect()() 这样的函数调用实际上是在调用一个函数并立即执行其返回的结果（假设 connect() 返回的是一个函数）。这种模式通常被称为 "立即执行函数"（Immediately Invoked Function Expression，IIFE）。
+
+        在这种情况下，connect() 是一个返回函数的函数，而第二对括号 () 则立即执行了这个返回的函数。这种技术通常用于创建一个局部作用域，以避免变量污染全局作用域。
+
+        值得注意的是，connect() 返回的函数可能会接受参数，因此在第二对括号中也可以传递参数给这个返回的函数。这种模式在一些 JavaScript 库和框架中经常被使用，用于模块化开发或者创建闭包。
+    */
+    function connect() {
+        var message = "Hello, ";
+
+        return function (name) {
+            console.log(message + name);
+        };
+    }
+
+    connect()("Alice"); // 输出: Hello, Alice
+    connect()("Bob");   // 输出: Hello, Bob
+
+    const connect1 = connect()
+    connect1("Smith")
+</script>
+
+</html>

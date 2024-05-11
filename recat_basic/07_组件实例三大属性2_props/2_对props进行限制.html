@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- 准备好一个容器 -->
+    <div id="test">
+    </div>
+
+    <div id="test2">
+    </div>
+
+    <div id="test3">
+    </div>
+</body>
+
+<!-- 引入react 核心库 WARNING:优先引入-->
+<script type="text/javascript" src="../js/react.development.js"></script>
+<!-- 引入react-dom,用于支持recat操作dom -->
+<script type="text/javascript" src="../js/react-dom.development.js"></script>
+<!-- 引入babel 用于将jsx转为js -->
+<script type="text/javascript" src="../js/babel.min.js"></script>
+<!-- 引入prop-types，用于对组件标签属性进行限制 -->
+<script type="text/javascript" src="../js/prop-types.js"></script>
+
+<script type="text/babel">
+    class Person extends React.Component {
+        render() {
+            const { name, sex, age } = this.props;
+            // props 是只读的
+            // this.props.name = 'lisa' // 此行会报错，因为props 是只读的
+            return (
+                <ul>
+                    <li>姓名：{name}</li>
+                    <li>性别：{sex}</li>
+                    <li>年龄：{age + 1}</li>
+                </ul>
+            )
+        }
+    }
+
+    //对标签属性进行类型，必要性的限制
+    Person.propTypes = {
+        name:PropTypes.string.isRequired,//限制name类型是字符串 必填
+        sex:PropTypes.string,//限制sex类型是字符串
+        age:PropTypes.number,//限制age类型是数值
+        speak:PropTypes.func//限制speak类型是函数
+    }
+
+    //设置默认标签属性值
+    Person.defaultProps = {
+        sex:'男',// sex默认值为男
+        age:18
+    }
+
+    function speak() {
+        console.log('说话了')
+    }
+    // 渲染组件到页面
+    const root = ReactDOM.createRoot(document.getElementById('test'))
+    root.render(<Person name='tom' speak = {speak}/>)
+
+    const root2 = ReactDOM.createRoot(document.getElementById('test2'))
+    root2.render(<Person name='wlole' age={19} sex='女' />)
+
+    const p = { name: 'pes', age: 18, sex: '女' }
+    const root3 = ReactDOM.createRoot(document.getElementById('test3'))
+    // 批量传递标签属性
+    root3.render(<Person {...p} />)
+</script>
+
+</html>
